@@ -25,11 +25,22 @@ const AppController = (() => {
                 message: `${project.name} could not be found`
             };
         }
+    };
+
+    function getProjectTodos(projectName) {
+        const project = projects.find(p => p.name === projectName);
+        return project ? project.getTodos() : []; // if project exists but is empty, doesn't return error. 
+    };
+
+    function getAllProjects() {
+        return projects;
     }
 
     return {
         addProject,
         addTodoToProject,
+        getProjectTodos,
+        getAllProjects
     };
 
 })();
