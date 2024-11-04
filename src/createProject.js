@@ -2,11 +2,6 @@
 function createProject(name) {
     const todos = []; // array of projects.
 
-    const allTodosProject = createProject.defaultProject || createProject("All Todos"); // save default to allTodosProject. if doesn't exist, then create one. 
-    if (!createProject.defaultProject) { // defaultProject used here to denote allTodos project - save in case user creates one called all todos. covers base too. 
-        createProject.defaultProject = allTodosProject; // if no default set, then put it in place.
-    }
-
     return { // return obj.
         name,
         addTodo(todo) { // method.
@@ -27,12 +22,8 @@ function createProject(name) {
             return todos.some(todo => todo.title === todoTitle); // checks for specific todo.
         }
     };
-    
-    //set default project to all todos.
-    
-    //filter todos by property.
-
-    //get todos - return the current list of todos. getter method.
+        
+    //filter todos by property. add this last.
 }
 
 export default createProject;
