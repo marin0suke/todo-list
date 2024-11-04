@@ -4,12 +4,10 @@ function createProject(name) {
 
     return { // return obj.
         name,
-        //add todo to project.
         addTodo(todo) { // method.
             todos.push(todo);
         },
-         //remove todo from project
-        //check if it exists
+
         removeTodo(todoTitle) {
             const index = todos.findIndex(todo => todo.title === todoTitle); // find index of param title and actual todo.title.
             
@@ -19,13 +17,12 @@ function createProject(name) {
         },
         getTodos() {
             return todos;
+        },
+        hasTodo(todoTitle) {
+            return todos.some(todo => todo.title === todoTitle); // checks for specific todo.
         }
     };
   
-    
-   
-
-    // move todo between projects
 
     //set default project to all todos.
     
@@ -35,3 +32,5 @@ function createProject(name) {
 }
 
 export default createProject;
+
+// factory function create projects.

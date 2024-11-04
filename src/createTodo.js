@@ -18,3 +18,5 @@ function createTodo (title, description, priority, dueDate, completed) {
 }
 
 export default createTodo;
+
+// factory function create todo.
