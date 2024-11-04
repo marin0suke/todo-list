@@ -27,6 +27,20 @@ const AppController = (() => {
         }
     };
 
+    function moveTodoUtility(todoTitle, sourceProjectName, targetProjectName) { // necessary to have this here since we are searching within projects array for the source and target.
+        const sourceProject = project.find(p => p.name === sourceProjectName);
+        const targetProject = project.find(p => p.name === targetProjectName);
+
+        if (sourceProject && targetProject) {
+            moveTodosBetweenProjects(todoTitle, sourceProject, targetProject);
+        } else {
+            return {
+                success: false,
+                message: "Source project or target project not found."
+            }
+        }
+    }
+
     function getProjectTodos(projectName) {
         const project = projects.find(p => p.name === projectName);
         return project ? project.getTodos() : []; // if project exists but is empty, doesn't return error. 
@@ -39,6 +53,7 @@ const AppController = (() => {
     return {
         addProject,
         addTodoToProject,
+        moveTodoUtility,
         getProjectTodos,
         getAllProjects
     };
