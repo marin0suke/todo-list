@@ -15,10 +15,23 @@ const AppController = (() => {
         return project;
     };
 
+    function addTodoToProject(todo, projectName) {
+        const project = projects.find(p => p.name === projectName);
+        if (project) {
+            project.addTodo(todo); // uses addTodo inside createProject to push todo to targeted project.
+        } else {
+            return {
+                success: false,
+                message: `${project.name} could not be found`
+            };
+        }
+    }
 
     return {
         addProject,
-
+        addTodoToProject,
     };
 
 })();
+
+export default AppController;
