@@ -2,24 +2,26 @@ import createTodo from "./createTodo.js";
 import createProject from "./createProject.js";
 import { moveTodosBetweenProjects } from "./projectUtils.js";
 import AppController from "./appController.js";
+import "./styles.css";
+import { renderProjects } from "./domRenderer.js";
+import { setupEventListeners } from "./setupEventListeners.js";
 
-const cleanToilet = createTodo("clean toilet");
-const buyHarddrive = createTodo("buy harddrive");
+function initializeApp() {
+    AppController.addProject("Chores");
+    AppController.addProject("Uni");
 
-const chores = createProject("chores");
+    // Create and add some initial todos
+    const cleanToilet = createTodo("Clean the toilet", "Deep clean the bathroom", "High", "2024-11-15", false);
+    const buyHardDrive = createTodo("Buy hard drive", "Purchase a 1TB SSD", "Medium", "2024-11-20", false);
 
-chores.addTodo(cleanToilet);
-console.log(chores.getTodos());
-chores.addTodo(buyHarddrive);
-console.log(chores.getTodos());
+    AppController.addTodoToProject(cleanToilet, "Chores");
+    AppController.addTodoToProject(buyHardDrive, "Chores");
 
+    renderProjects(AppController.getAllProjects());
+}
 
-const uni = createProject("uni");
+window.onload = () => {
+    initializeApp();
+    setupEventListeners();
+}
 
-console.log(chores.getTodos());
-
-moveTodosBetweenProjects("buy harddrive", chores, uni);
-
-
-console.log(uni.getTodos());
-console.log(chores.getTodos());

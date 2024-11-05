@@ -5,14 +5,17 @@ function renderProjects(projects) {
     container.innerHTML = ""; // clear container before rendering anything.
     // set default h2 for all todos?
 
-    projects.forEach(project = () => {
+    projects.forEach(project => {
         const projectDiv = document.createElement("div");
         projectDiv.classList.add("project");
-        projectDiv.textContent = `<h2>${project.name}</h2>`; // not sure if correct.
 
+        const projectTitle = document.createElement("h2");
+        projectTitle.textContent = project.name; // Set the title as plain text
+        projectDiv.appendChild(projectTitle);
+        
         const todoList = document.createElement("ul"); // create empty list to put todos.
         const todos = project.getTodos(); // get todos.
-        todos.forEach(todo => () => {
+        todos.forEach(todo => {
             const todoItem = document.createElement("li");
             todoItem.textContent = `${todo.title} - Priority ${todo.priority}`;
             todoList.appendChild(todoItem);
@@ -45,7 +48,7 @@ function renderTodoForm() {
 
     const priorityInput = document.createElement("select");
     priorityInput.name = "priority";
-    ["Low", "Medium", "High"] = forEach(level => {
+    ["Low", "Medium", "High"].forEach(level => {
         const option = document.createElement("option");
         option.textContent = level;
         option.value = level;
