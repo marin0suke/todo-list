@@ -1,23 +1,29 @@
 
 // add event listeners here. start by adding add project button and add todo button.
 import AppController from "./appController";
-import { renderProjects, toggleTodoForm } from "./domRenderer";
+import { renderProjects, renderTodoForm, toggleTodoForm } from "./domRenderer";
+import createTodo from "./createTodo";
 
 function setupEventListeners() {
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelector(".create-todo").addEventListener("click", () => {
+        renderTodoForm(); // make sure the form is rendered in the DOM so accessible.
+
+        const createTodoButton = document.querySelector(".create-todo"); // should this be in DOM renderer instead? oops
+        const submitFormButton = document.querySelector(".todo-form");
+
+        createTodoButton.addEventListener("click", () => {
+            console.log("test!");
             toggleTodoForm(true);
         });
     
-        document.querySelector(".todo-form").addEventListener("submit", (event) => {
+        submitFormButton.addEventListener("submit", (event) => {
             // clicking button on form same as submit event for form.
-            event.preventDefault; // not sure if need yet.
+            event.preventDefault(); // not sure if need yet.
             // on submit, the input attributes are usable. 
     
             const title = event.target.title.value;
             const description = event.target.description.value;
-            const priority = event.target.description.value;
-            const dueDate = event.target.description.value;
+            const priority = event.target.priority.value;
+            const dueDate = event.target.dueDate.value;
             // add completed here.
             
             const newTodo = createTodo(title, description, priority, dueDate, false);
@@ -33,7 +39,7 @@ function setupEventListeners() {
         document.querySelector(".create-project").addEventListener("click", () => {
     
         });
-    });
 }
 
 export { setupEventListeners };
+
