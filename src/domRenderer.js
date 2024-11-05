@@ -69,4 +69,9 @@ function renderTodoForm() {
     return formContainer;
 }
 
-export { renderProjects } ;
+function toggleTodoForm(visible) {
+    const formContainer = document.querySelector(".todo-form-container");
+    formContainer.style.display = visible ? "block" : "none"; // if visible var true then show container. otherwise hide.
+}
+
+export { renderProjects, renderTodoForm, toggleTodoForm } ;
