@@ -86,6 +86,11 @@ function renderProjects(projects) {
             itemContainer.appendChild(editButton);
 
             todoItem.appendChild(itemContainer);
+
+            if (todo.completed) {
+                todoItem.classList.add("completed-todo");
+            }
+            
             todoList.appendChild(todoItem);
 
         });

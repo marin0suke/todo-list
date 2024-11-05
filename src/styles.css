@@ -122,3 +122,9 @@ body {
     border-radius: 3px;
     cursor: pointer;
 }
+
+.completed-todo {
+    opacity: 0.6; /* Makes the todo appear grayed out */
+    text-decoration: line-through; /* Adds strikethrough effect */
+    color: gray; /* Sets text color to gray */
+}
