@@ -15,8 +15,12 @@ function renderProjects(projects) {
         projectDiv.appendChild(projectTitle);
 
         const todoList = document.createElement("ul"); // create empty list to put todos.
-        todoList.classList.add("todo-list")
-        const todos = project.getTodos(); // get todos.
+        todoList.classList.add("todo-list");
+
+        let todos = project.getTodos(); // get todos.
+
+        todos = todos.sort((a, b) => a.completed - b.completed); // sorts in array. completed at bottom. 
+
         todos.forEach(todo => { // everything created here will be attached to each todo item.
             const todoItem = document.createElement("li");
             todoItem.classList.add("todo-item");
@@ -29,6 +33,11 @@ function renderProjects(projects) {
             checkbox.checked = todo.completed;
             checkbox.classList.add("completed-checkbox");
             itemContainer.appendChild(checkbox);
+
+            checkbox.addEventListener("change", () => {
+                todo.completed = checkbox.checked; // Update todo completion status
+                renderProjects(projects); // Re-render projects to update order and style
+            });
 
             const textContentContainer = document.createElement("div");
             textContentContainer.classList.add("text-content");
@@ -65,12 +74,14 @@ function renderProjects(projects) {
             itemContainer.appendChild(priorityDot);
 
             const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Delete";
+            deleteButton.innerHTML = `Del`;
+            deleteButton.style.fontSize = "10px";
             deleteButton.classList.add("delete-button");
             itemContainer.appendChild(deleteButton);
 
             const editButton = document.createElement("button");
             editButton.textContent = "Edit";
+            editButton.style.fontSize = "10px";
             editButton.classList.add("edit-button");
             itemContainer.appendChild(editButton);
 
