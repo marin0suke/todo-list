@@ -79,4 +79,24 @@ function toggleTodoForm(visible) {
     formContainer.style.display = visible ? "block" : "none"; // if visible var true then show container. otherwise hide.
 }
 
-export { renderProjects, renderTodoForm, toggleTodoForm } ;
+function renderProjectForm() {
+    const formContainer = document.createElement("div");
+    formContainer.classList.add("project-form-container");
+    formContainer.style.display = "none";
+
+    const projectForm = document.createElement("form");
+    projectForm.classList("project-form");
+
+    const projectName = document.createElement("input");
+    projectName.name = "project-name";
+    projectName.type = "text";
+    projectName.placeholder = "Name your brand new project!";
+    projectForm.appendChild(projectName);
+
+    formContainer.appendChild(projectForm);
+    document.body.appendChild(formContainer);
+
+    return formContainer;
+}
+
+export { renderProjects, renderTodoForm, toggleTodoForm, renderProjectForm } ;

@@ -8,13 +8,13 @@ function setupEventListeners() {
         renderTodoForm(); // make sure the form is rendered in the DOM so accessible.
 
         const createTodoButton = document.querySelector(".create-todo"); // should this be in DOM renderer instead? oops
-        const submitFormButton = document.querySelector(".todo-form");
+        const submitForm = document.querySelector(".todo-form");
 
         createTodoButton.addEventListener("click", () => {
             toggleTodoForm(true);
         });
     
-        submitFormButton.addEventListener("submit", (event) => {
+        submitForm.addEventListener("submit", (event) => {
             // clicking button on form same as submit event for form.
             event.preventDefault(); // not sure if need yet.
             // on submit, the input attributes are usable. 
@@ -34,9 +34,11 @@ function setupEventListeners() {
             renderProjects(AppController.getAllProjects()); // rerenders with the added info.
     
         });
+
+        const createProjectButton = document.querySelector(".create-project");
     
-        document.querySelector(".create-project").addEventListener("click", () => {
-    
+        createProjectButton.addEventListener("click", () => {
+            
         });
 }
 
