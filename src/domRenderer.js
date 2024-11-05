@@ -74,9 +74,13 @@ function renderTodoForm() {
     return formContainer;
 }
 
-function toggleTodoForm(visible) {
-    const formContainer = document.querySelector(".todo-form-container");
-    formContainer.style.display = visible ? "block" : "none"; // if visible var true then show container. otherwise hide.
+function toggleForm(selector, visible) {
+    const formContainer = document.querySelector(selector);
+    if (formContainer) {
+        formContainer.style.display = visible ? "block" : "none"; // if visible var true then show container. otherwise hide.
+    } else {
+        console.error(`Element with selector "${selector}" not found.`);
+    }
 }
 
 function renderProjectForm() {
@@ -99,4 +103,4 @@ function renderProjectForm() {
     return formContainer;
 }
 
-export { renderProjects, renderTodoForm, toggleTodoForm, renderProjectForm } ;
+export { renderProjects, renderTodoForm, toggleForm, renderProjectForm } ;
