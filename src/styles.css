@@ -15,6 +15,9 @@ body {
     background-color: #fff1f2;
     padding: 40px;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .projects-container {
@@ -22,7 +25,74 @@ body {
     padding: 20px;
     border-radius: 10px;
     display: flex; /*temp to check how cards are looking*/
+    flex-direction: column;
     gap: 10px;
+    padding: 20px;
+    background-color: #ffe6e6; /* Light pink background */
+    border-radius: 25px; /* Rounded corners for a cushion-like effect */
+    box-shadow: 
+        0px 0px 15px 8px rgba(0, 0, 0, 0.15), /* Evenly spread shadow for front lighting */
+        inset 0px 0px 8px rgba(255, 255, 255, 0.9); /* Inner highlight for puffy look */
+    transition: box-shadow 0.3s ease; /* Smooth transition for interactions */
+}
+
+.search {
+    display: flex;
+    align-items: center; /* Center input and button */
+    gap: 8px; /* Space between input and button */
+}
+
+
+.header-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space out elements horizontally */
+    background-color: #fb7185; /* Light background color */
+    padding: 20px;
+    border-radius: 35px; /* Rounded corners for a cushion-like effect */
+    box-shadow: 
+        0px 0px 15px 8px rgba(0, 0, 0, 0.15), /* Evenly spread shadow for front lighting */
+        inset 0px 0px 8px rgba(255, 255, 255, 0.9); /* Inner highlight for puffy look */
+    transition: box-shadow 0.3s ease; /* Smooth transition for interactions */
+}
+
+
+#search-bar {
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-button {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.create-todo, .create-project {
+    background-color: #fda4af; /* Soft pastel pink background */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 25px; /* Rounded for pill-like shape */
+    font-size: 12px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, transform 0.2s ease, background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-todo:hover, .create-project:hover {
+    background-color: #e0e0e0;
 }
 
 .todo-form-container { /*hidden form triggered by add todo*/
@@ -35,6 +105,10 @@ body {
     background-color: #fda4af;
     padding: 20px;
     border-radius: 10px;
+}
+
+.project h2 {
+    color: white;
 }
 
 .todo-list {

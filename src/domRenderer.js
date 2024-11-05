@@ -86,6 +86,9 @@ function renderProjects(projects) {
             editButton.textContent = "Edit";
             editButton.style.fontSize = "10px";
             editButton.classList.add("edit-button");
+            editButton.addEventListener("click", () => {
+                //   
+            });
             itemContainer.appendChild(editButton);
 
             todoItem.appendChild(itemContainer);
