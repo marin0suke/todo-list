@@ -11,9 +11,11 @@ function renderProjects(projects) {
 
         const projectTitle = document.createElement("h2");
         projectTitle.textContent = project.name; // Set the title as plain text
+        projectTitle.style.marginBottom = "20px";
         projectDiv.appendChild(projectTitle);
-        
+
         const todoList = document.createElement("ul"); // create empty list to put todos.
+        todoList.classList.add("todo-list")
         const todos = project.getTodos(); // get todos.
         todos.forEach(todo => {
             const todoItem = document.createElement("li");

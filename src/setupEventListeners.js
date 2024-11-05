@@ -11,7 +11,6 @@ function setupEventListeners() {
         const submitFormButton = document.querySelector(".todo-form");
 
         createTodoButton.addEventListener("click", () => {
-            console.log("test!");
             toggleTodoForm(true);
         });
     

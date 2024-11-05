@@ -6,11 +6,10 @@ import "./styles.css";
 import { renderProjects } from "./domRenderer.js";
 import { setupEventListeners } from "./setupEventListeners.js";
 
-function initializeApp() {
+function initializeApp() { // some dummy content, renders initial page.
     AppController.addProject("Chores");
     AppController.addProject("Uni");
 
-    // Create and add some initial todos
     const cleanToilet = createTodo("Clean the toilet", "Deep clean the bathroom", "High", "2024-11-15", false);
     const buyHardDrive = createTodo("Buy hard drive", "Purchase a 1TB SSD", "Medium", "2024-11-20", false);
 
@@ -20,7 +19,7 @@ function initializeApp() {
     renderProjects(AppController.getAllProjects());
 }
 
-window.onload = () => {
+window.onload = () => { // conditionally runs block on whether window is loaded - event listeners don't run until elements are on the page. (avoid timing conflicts).
     initializeApp();
     setupEventListeners();
 }
