@@ -17,10 +17,12 @@ function renderProjects(projects) {
         const todoList = document.createElement("ul"); // create empty list to put todos.
         todoList.classList.add("todo-list")
         const todos = project.getTodos(); // get todos.
-        todos.forEach(todo => {
+        todos.forEach(todo => { // everything created here will be attached to each todo item.
             const todoItem = document.createElement("li");
             todoItem.textContent = `${todo.title} - Priority ${todo.priority}`;
             todoList.appendChild(todoItem);
+
+            
         });
 
         projectDiv.appendChild(todoList);
@@ -89,13 +91,18 @@ function renderProjectForm() {
     formContainer.style.display = "none";
 
     const projectForm = document.createElement("form");
-    projectForm.classList("project-form");
+    projectForm.classList.add("project-form");
 
     const projectName = document.createElement("input");
-    projectName.name = "project-name";
+    projectName.name = "projectTitle";
     projectName.type = "text";
     projectName.placeholder = "Name your brand new project!";
     projectForm.appendChild(projectName);
+
+    const submitButton = document.createElement("button");
+    submitButton.type = "submit";
+    submitButton.textContent = "Create Project!";
+    projectForm.appendChild(submitButton);
 
     formContainer.appendChild(projectForm);
     document.body.appendChild(formContainer);

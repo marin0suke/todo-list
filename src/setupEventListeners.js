@@ -1,11 +1,13 @@
 
 // add event listeners here. start by adding add project button and add todo button.
 import AppController from "./appController";
-import { renderProjects, renderTodoForm, toggleForm } from "./domRenderer";
+import { renderProjects, renderTodoForm, toggleForm, renderProjectForm} from "./domRenderer";
 import createTodo from "./createTodo";
+import createProject from "./createProject";
 
 function setupEventListeners() {
         renderTodoForm(); // make sure the form is rendered in the DOM so accessible.
+        renderProjectForm();  
 
         const createTodoButton = document.querySelector(".create-todo"); // should this be in DOM renderer instead? oops
         const submitTodoForm = document.querySelector(".todo-form");
@@ -28,7 +30,7 @@ function setupEventListeners() {
             const newTodo = createTodo(title, description, priority, dueDate, false);
             AppController.addTodoToProject(newTodo, "All Todos");
     
-            toggleForm(false); // hides form
+            toggleForm(".todo-form-container", false); // hides form
             event.target.reset();
     
             renderProjects(AppController.getAllProjects()); // rerenders with the added info.
@@ -36,10 +38,23 @@ function setupEventListeners() {
         });
 
         const createProjectButton = document.querySelector(".create-project");
+        const submitProjectForm = document.querySelector(".project-form");
     
         createProjectButton.addEventListener("click", () => {
-            
+            toggleForm(".project-form-container", true);
         });
+
+        submitProjectForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const name = event.target.projectTitle.value;
+            createProject(name);
+            
+            toggleForm(".project-form-container", false);
+            event.target.reset();
+
+            renderProjects(AppController.getAllProjects());
+        })
 }
 
 export { setupEventListeners };

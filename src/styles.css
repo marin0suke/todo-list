@@ -42,3 +42,11 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.todo-list > li {
+    background-color: #ffe4e6;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+   
+}
