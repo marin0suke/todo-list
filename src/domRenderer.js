@@ -1,5 +1,4 @@
 
-
 function renderProjects(projects) {
     const container = document.querySelector(".projects-container");
     container.innerHTML = ""; // clear container before rendering anything.
@@ -77,6 +76,10 @@ function renderProjects(projects) {
             deleteButton.innerHTML = `Del`;
             deleteButton.style.fontSize = "10px";
             deleteButton.classList.add("delete-button");
+            deleteButton.addEventListener("click", () => {
+                project.removeTodo(todo.title);
+                renderProjects(projects);
+            })
             itemContainer.appendChild(deleteButton);
 
             const editButton = document.createElement("button");
@@ -90,7 +93,7 @@ function renderProjects(projects) {
             if (todo.completed) {
                 todoItem.classList.add("completed-todo");
             }
-            
+
             todoList.appendChild(todoItem);
 
         });
@@ -180,4 +183,4 @@ function renderProjectForm() {
     return formContainer;
 }
 
-export { renderProjects, renderTodoForm, toggleForm, renderProjectForm } ;
+export { renderProjects, renderTodoForm, toggleForm, renderProjectForm} ;

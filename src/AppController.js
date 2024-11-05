@@ -25,6 +25,7 @@ const AppController = (() => {
             };
         }
     };
+    
 
     function moveTodoUtility(todoTitle, sourceProjectName, targetProjectName) { // necessary to have this here since we are searching within projects array for the source and target.
         const sourceProject = project.find(p => p.name === sourceProjectName);
