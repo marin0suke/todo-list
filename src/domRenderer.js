@@ -19,10 +19,64 @@ function renderProjects(projects) {
         const todos = project.getTodos(); // get todos.
         todos.forEach(todo => { // everything created here will be attached to each todo item.
             const todoItem = document.createElement("li");
-            todoItem.textContent = `${todo.title} - Priority ${todo.priority}`;
+            todoItem.classList.add("todo-item");
+
+            const itemContainer = document.createElement("div");
+            itemContainer.classList.add("list-item-container");
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = todo.completed;
+            checkbox.classList.add("completed-checkbox");
+            itemContainer.appendChild(checkbox);
+
+            const textContentContainer = document.createElement("div");
+            textContentContainer.classList.add("text-content");
+
+            const itemTitle = document.createElement("span");
+            itemTitle.textContent = todo.title;
+            itemTitle.classList.add("item-title");
+            textContentContainer.appendChild(itemTitle);
+
+            const itemDescription = document.createElement("span");
+            itemDescription.textContent = todo.description;
+            itemDescription.style.fontStyle = "italic";
+            itemDescription.classList.add("item-description");
+            textContentContainer.appendChild(itemDescription);
+
+            itemContainer.appendChild(textContentContainer);
+
+            // Create date span
+            const dateSpan = document.createElement("span");
+            dateSpan.classList.add("todo-date");
+            dateSpan.textContent = `Due: ${todo.dueDate}`;
+            itemContainer.appendChild(dateSpan);
+
+            // Create priority dot
+            const priorityDot = document.createElement("span");
+            priorityDot.classList.add("priority-dot");
+            if (todo.priority === "High") {
+                priorityDot.classList.add("high-priority");
+            } else if (todo.priority === "Medium") {
+                priorityDot.classList.add("medium-priority");
+            } else {
+                priorityDot.classList.add("low-priority");
+            }
+            itemContainer.appendChild(priorityDot);
+
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.classList.add("delete-button");
+            itemContainer.appendChild(deleteButton);
+
+            const editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.classList.add("edit-button");
+            itemContainer.appendChild(editButton);
+
+            todoItem.appendChild(itemContainer);
             todoList.appendChild(todoItem);
 
-            
         });
 
         projectDiv.appendChild(todoList);
