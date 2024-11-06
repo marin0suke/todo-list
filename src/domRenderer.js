@@ -1,3 +1,4 @@
+import AppController from "./AppController";
 
 function renderProjects(projects) {
     const container = document.querySelector(".projects-container");
@@ -110,10 +111,13 @@ function renderDefaultProject() {
     const container = document.querySelector(".default-container");
     container.innerHTML = "";
 
+    const defaultProject = AppController.getDefaultProject();
+    let todos = defaultProject.getTodos();
+
     const todoList = document.createElement("ul"); // create empty list to put todos.
     todoList.classList.add("todo-list");
 
-    let todos = project.getTodos(); // get todos from factory function projects!
+    // let todos = project.getTodos(); // get todos from factory function projects!
 
     todos = todos.sort((a, b) => a.completed - b.completed); // sorts in array. completed at bottom. 
 

@@ -27,7 +27,7 @@ const AppController = (() => {
         }
     };
 
-    function getDefaultProjectName() {
+    function getDefaultProject() {
         return defaultProject;
     }
     
@@ -61,7 +61,7 @@ const AppController = (() => {
         moveTodoUtility,
         getProjectTodos,
         getAllProjects,
-        getDefaultProjectName
+        getDefaultProject
     };
 
 })();
