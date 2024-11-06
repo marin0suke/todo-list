@@ -1,6 +1,5 @@
 
 import createProject from "./createProject";
-import { renderDefaultProject } from "./domRenderer";
 import { moveTodosBetweenProjects } from "./projectUtils";
 
 const AppController = (() => {
@@ -26,6 +25,16 @@ const AppController = (() => {
             };
         }
     };
+
+    function setDefaultProject(projectName) {
+        const project = projects.find(p => p.name === projectName);
+        if (project) {
+            defaultProject = project; //
+            return true; // successfully changed.
+        } else {
+            return false; // project not found.
+        }
+    }
 
     function getDefaultProject() {
         return defaultProject;
@@ -61,7 +70,8 @@ const AppController = (() => {
         moveTodoUtility,
         getProjectTodos,
         getAllProjects,
-        getDefaultProject
+        getDefaultProject,
+        setDefaultProject
     };
 
 })();

@@ -1,7 +1,7 @@
 
 // add event listeners here. start by adding add project button and add todo button.
 import AppController from "./AppController";
-import { renderProjects, renderTodoForm, toggleForm, renderProjectForm, renderDefaultProject} from "./domRenderer";
+import { renderProjects, renderTodoForm, toggleForm, renderProjectForm, renderDefaultProject } from "./domRenderer";
 import createTodo from "./createTodo";
 import createProject from "./createProject";
 
@@ -57,5 +57,21 @@ function setupEventListeners() {
         })
 }
 
-export { setupEventListeners };
+function setupProjectSelection() {
+    const projectElements = document.querySelectorAll(".project"); // Assuming .project is the class for each project
+
+    projectElements.forEach(projectElement => {
+        projectElement.addEventListener("click", () => {
+            const projectName = projectElement.querySelector("h5").textContent; // Assuming <h2> holds the project name
+
+            if (AppController.setDefaultProject(projectName)) {
+                renderDefaultProject(); // Re-render todos in default container
+            } else {
+                console.error(`Project "${projectName}" not found`);
+            }
+        });
+    });
+}
+
+export { setupEventListeners, setupProjectSelection };
 

@@ -4,7 +4,7 @@ import { moveTodosBetweenProjects } from "./projectUtils.js";
 import AppController from "./AppController.js";
 import "./styles.css";
 import { renderDefaultProject, renderProjects } from "./domRenderer.js";
-import { setupEventListeners } from "./setupEventListeners.js";
+import { setupEventListeners, setupProjectSelection} from "./setupEventListeners.js";
 
 function initializeApp() { // some dummy content, renders initial page.
     AppController.addProject("Chores");
@@ -17,7 +17,9 @@ function initializeApp() { // some dummy content, renders initial page.
     AppController.addTodoToProject(buyHardDrive, "Chores");
 
     renderProjects(AppController.getAllProjects());
+    setupProjectSelection();
     renderDefaultProject();
+
 }
 
 window.onload = () => { // conditionally runs block on whether window is loaded - event listeners don't run until elements are on the page. (avoid timing conflicts).

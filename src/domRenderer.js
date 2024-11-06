@@ -51,7 +51,7 @@ function renderDefaultProject() {
 
         checkbox.addEventListener("change", () => {
             todo.completed = checkbox.checked; // Update todo completion status
-            renderProjects(projects); // Re-render projects to update order and style
+            renderDefaultProject();
         });
 
         const textContentContainer = document.createElement("div");
