@@ -25,7 +25,8 @@ function setupEventListeners() {
             const description = event.target.description.value;
             const priority = event.target.priority.value;
             const dueDate = event.target.dueDate.value;
-            const projectName = submitTodoForm.dataset.projectName;
+            const projectName = submitTodoForm.dataset.projectName; // used for editing within the project (this gets deleted)
+            const selectedProject = event.target.project.value; // taken from the form input.
             // add completed here.
             
             if (submitTodoForm.dataset.editing === "true") {
@@ -53,8 +54,9 @@ function setupEventListeners() {
             } else {
                 // Create mode: Add a new todo
                 const newTodo = createTodo(title, description, priority, dueDate, false);
-                const defaultProject = AppController.getDefaultProject();
-                defaultProject.addTodo(newTodo);
+                AppController.addTodoToProject(newTodo, selectedProject);
+                AppController.setDefaultProject(selectedProject);
+                AppController.getDefaultProject();
             }
     
             toggleForm(".todo-form-container", false); // hides form

@@ -83,12 +83,15 @@ const AppController = (() => {
         const targetProject = projects.find(p => p.name === targetProjectName);
 
         if (sourceProject && targetProject) {
-            moveTodosBetweenProjects(todoTitle, sourceProject, targetProject);
-        } else {
-            return {
-                success: false,
-                message: "Source project or target project not found."
+            const todoIndex = sourceProject.todo.findIndex(todo => todo.title === todoTitle);
+            if (todoIndex !== -1) {
+                const [todo] = sourceProject.todos.splice(todoIndex, 1); // Remove the todo
+                targetProject.addTodo(todo); // Add the todo to the target project
+                return true;
             }
+        } else {
+            console.error("Todo or project not found");
+            return false;
         }
     }
 

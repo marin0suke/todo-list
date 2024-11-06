@@ -1,6 +1,5 @@
 import createTodo from "./createTodo.js";
 import createProject from "./createProject.js";
-import { moveTodosBetweenProjects } from "./projectUtils.js";
 import AppController from "./AppController.js";
 import "./styles.css";
 import { renderDefaultProject, renderProjects } from "./domRenderer.js";

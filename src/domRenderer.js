@@ -183,6 +183,19 @@ function renderTodoForm() {
     descriptionInput.placeholder = "Description";
     todoForm.appendChild(descriptionInput);
 
+    const selectProjectInput = document.createElement("select");
+    selectProjectInput.name = "project";
+    // selectProjectInput.placeholder = "Select Project";
+    const projects = AppController.getAllProjects().filter(project => project.name !== "All Todos");
+    
+    projects.forEach(project => {
+        const option = document.createElement("option");
+        option.value = project.name;
+        option.textContent = project.name;
+        selectProjectInput.appendChild(option);
+    });
+    todoForm.appendChild(selectProjectInput);
+
     const priorityInput = document.createElement("select");
     priorityInput.name = "priority";
     ["Low", "Medium", "High"].forEach(level => {
