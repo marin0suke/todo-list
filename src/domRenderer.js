@@ -95,26 +95,44 @@ function renderDefaultProject() {
         deleteButton.innerHTML = `Del`;
         deleteButton.style.fontSize = "10px";
         deleteButton.classList.add("delete-button");
-        deleteButton.addEventListener("click", () => {
-            defaultProject.removeTodo(todo.title);
-            renderDefaultProject();
-        })
+        if (isAllTodos) {
+            // Grey out and disable delete button if "All Todos" is the default project
+            deleteButton.disabled = true;
+            deleteButton.style.opacity = "0.3"; // Grey out the button
+            deleteButton.style.cursor = "not-allowed"; // Change cursor to indicate it's disabled
+            deleteButton.style.backgroundColor = "grey";
+        } else {
+            deleteButton.addEventListener("click", () => {
+                defaultProject.removeTodo(todo.title);
+                renderDefaultProject();
+            });
+        };
         itemContainer.appendChild(deleteButton);
+
+
 
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
         editButton.style.fontSize = "10px";
         editButton.classList.add("edit-button");
-        editButton.addEventListener("click", () => {
-            openEditForm(todo, defaultProject.name);
-        });
+        if (isAllTodos) {
+            editButton.disabled = true;
+            editButton.style.opacity = "0.3";
+            editButton.style.cursor = "not-allowed";
+            editButton.style.backgroundColor = "grey";
+        } else {
+            editButton.addEventListener("click", () => {
+                openEditForm(todo, defaultProject.name);
+            });
+        }
+
         itemContainer.appendChild(editButton);
 
         todoItem.appendChild(itemContainer);
 
         if (todo.completed) {
             todoItem.classList.add("completed-todo");
-        }
+        };
 
         todoList.appendChild(todoItem);
 
