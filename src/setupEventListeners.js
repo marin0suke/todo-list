@@ -73,13 +73,18 @@ function setupEventListeners() {
             event.preventDefault();
 
             const name = event.target.projectTitle.value;
-            createProject(name);
-            
-            toggleForm(".project-form-container", false);
-            event.target.reset();
 
-            renderProjects(AppController.getAllProjects());
-        })
+            if (name) {
+                AppController.addProject(name);
+
+                toggleForm(".project-form-container", false);
+                event.target.reset();
+    
+                renderProjects(AppController.getAllProjects());
+            } else {
+                console.error("Failed to create new project");
+            }
+        });
 }
 
 function setupProjectSelection() {

@@ -40,6 +40,7 @@ body {
         inset 0px 0px 8px rgba(255, 255, 255, 0.9); /* Inner highlight for puffy look */
     transition: box-shadow 0.3s ease; /* Smooth transition for interactions */
     flex-grow: 0; 
+    flex-shrink: 0;
 }
 
 .default-container {

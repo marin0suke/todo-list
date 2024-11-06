@@ -1,4 +1,5 @@
 import AppController from "./AppController";
+import { setupProjectSelection } from "./setupEventListeners";
 
 function renderProjects(projects) {
     const container = document.querySelector(".projects-container");
@@ -16,6 +17,8 @@ function renderProjects(projects) {
 
         container.appendChild(projectDiv); // inside forEach loop so each project is attached.
     })
+
+    setupProjectSelection(); // reapplies event listeners after rendering projects.
 }
 
 function renderDefaultProject() {
