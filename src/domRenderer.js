@@ -28,9 +28,29 @@ function renderDefaultProject() {
     const defaultProject = AppController.getDefaultProject();
     const isAllTodos = defaultProject.name === "All Todos"; // check if current default is All Todos.
 
+    const defaultHeader = document.createElement("div"); // added div to hold header and delete button.
+    defaultHeader.classList.add("default-header");
+
     const defaultTitle = document.createElement("h2");
     defaultTitle.textContent = defaultProject.name;
-    container.appendChild(defaultTitle);
+    defaultHeader.appendChild(defaultTitle);
+
+    if (!isAllTodos) {
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("delete-project-button");
+
+        // Event listener to delete the current default project
+        deleteButton.addEventListener("click", () => {
+            AppController.deleteProject(defaultProject.name);
+            renderProjects(AppController.getAllProjects()); // Re-render project list
+            renderDefaultProject(); // Re-render default container to show "All Todos"
+        });
+
+        defaultHeader.appendChild(deleteButton);
+    }
+
+    container.appendChild(defaultHeader);
 
     const todoList = document.createElement("ul"); // create empty list to put todos.
     todoList.classList.add("todo-list");

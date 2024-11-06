@@ -105,6 +105,32 @@ const AppController = (() => {
         return projects.flatMap(project => project.getTodos());
     }
 
+    function deleteProject(projectName) {
+        // Prevent deletion of "All Todos"
+        if (projectName === "All Todos") {
+            console.error("Cannot delete 'All Todos' project.");
+            return false;
+        }
+    
+        // Find the index of the project
+        const projectIndex = projects.findIndex(p => p.name === projectName);
+    
+        if (projectIndex !== -1) {
+            // Remove the project from the array
+            const [deletedProject] = projects.splice(projectIndex, 1);
+    
+            // If the deleted project was the default, reset the default to "All Todos"
+            if (defaultProject === deletedProject) {
+                setDefaultProject("All Todos");
+            }
+            return true;
+        } else {
+            console.error(`Project "${projectName}" not found.`);
+            return false;
+        }
+    }
+    
+
     return {
         addProject,
         addTodoToProject,
@@ -114,7 +140,8 @@ const AppController = (() => {
         getDefaultProject,
         setDefaultProject,
         editTodoInProject,
-        getAllTodos
+        getAllTodos,
+        deleteProject
     };
 
 })();

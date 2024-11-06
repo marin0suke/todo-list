@@ -178,7 +178,6 @@ body {
     gap: 10px; /* Space between items */
     align-items: center;
     padding: 10px;
-    border: 1px solid #ddd;
     border-radius: 5px;
 }
 
@@ -256,4 +255,22 @@ body {
 
 .item-description {
     color: #aeaeae;
+}
+
+.default-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-project-button {
+    background-color: #fb7185; /* Light background color */
+    padding: 10px;
+    border: none;
+    border-radius: 35px; /* Rounded corners for a cushion-like effect */
+    box-shadow: 
+        0px 0px 15px 8px rgba(0, 0, 0, 0.15), /* Evenly spread shadow for front lighting */
+        inset 0px 0px 8px rgba(255, 255, 255, 0.9); /* Inner highlight for puffy look */
+    transition: box-shadow 0.3s ease; /* Smooth transition for interactions */
+    font-size: 8px;
+    color: white;
 }
