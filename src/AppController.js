@@ -1,5 +1,6 @@
 
 import createProject from "./createProject";
+import { renderDefaultProject } from "./domRenderer";
 import { moveTodosBetweenProjects } from "./projectUtils";
 
 const AppController = (() => {
@@ -30,6 +31,7 @@ const AppController = (() => {
         const project = projects.find(p => p.name === projectName);
         if (project) {
             defaultProject = project; //
+            // renderDefaultProject();
             return true; // successfully changed.
         } else {
             return false; // project not found.
@@ -100,6 +102,10 @@ const AppController = (() => {
         return projects;
     }
 
+    function getAllTodos() {
+        return projects.flatMap(project => project.getTodos());
+    }
+
     return {
         addProject,
         addTodoToProject,
@@ -108,7 +114,8 @@ const AppController = (() => {
         getAllProjects,
         getDefaultProject,
         setDefaultProject,
-        editTodoInProject
+        editTodoInProject,
+        getAllTodos
     };
 
 })();

@@ -249,3 +249,11 @@ body {
     text-decoration: line-through; /* Adds strikethrough effect */
     color: gray; /* Sets text color to gray */
 }
+
+.item-title {
+    color: rgb(87, 87, 87);
+}
+
+.item-description {
+    color: #aeaeae;
+}

@@ -26,7 +26,7 @@ function renderDefaultProject() {
     container.innerHTML = "";
 
     const defaultProject = AppController.getDefaultProject();
-    let todos = defaultProject.getTodos();
+    const isAllTodos = defaultProject.name === "All Todos"; // check if current default is All Todos.
 
     const defaultTitle = document.createElement("h2");
     defaultTitle.textContent = defaultProject.name;
@@ -35,7 +35,7 @@ function renderDefaultProject() {
     const todoList = document.createElement("ul"); // create empty list to put todos.
     todoList.classList.add("todo-list");
 
-    // let todos = project.getTodos(); // get todos from factory function projects!
+    let todos = isAllTodos ? AppController.getAllTodos() : defaultProject.getTodos(); // conditionally grab todos depending on whether All or another project.
 
     todos = todos.sort((a, b) => a.completed - b.completed); // sorts in array. completed at bottom. 
 
@@ -121,6 +121,8 @@ function renderDefaultProject() {
     });
 
     container.appendChild(todoList);
+
+    setupProjectSelection();
 }
 
 function renderTodoForm() {
