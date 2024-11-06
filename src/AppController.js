@@ -78,12 +78,12 @@ const AppController = (() => {
     
     
 
-    function moveTodoUtility(todoTitle, sourceProjectName, targetProjectName) { // necessary to have this here since we are searching within projects array for the source and target.
+    function moveTodoBetweenProjects(todoTitle, sourceProjectName, targetProjectName) { // necessary to have this here since we are searching within projects array for the source and target.
         const sourceProject = projects.find(p => p.name === sourceProjectName);
         const targetProject = projects.find(p => p.name === targetProjectName);
 
         if (sourceProject && targetProject) {
-            const todoIndex = sourceProject.todo.findIndex(todo => todo.title === todoTitle);
+            const todoIndex = sourceProject.todos.findIndex(todo => todo.title === todoTitle);
             if (todoIndex !== -1) {
                 const [todo] = sourceProject.todos.splice(todoIndex, 1); // Remove the todo
                 targetProject.addTodo(todo); // Add the todo to the target project
@@ -137,7 +137,7 @@ const AppController = (() => {
     return {
         addProject,
         addTodoToProject,
-        moveTodoUtility,
+        moveTodoBetweenProjects,
         getProjectTodos,
         getAllProjects,
         getDefaultProject,

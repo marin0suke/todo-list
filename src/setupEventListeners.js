@@ -25,15 +25,28 @@ function setupEventListeners() {
             const description = event.target.description.value;
             const priority = event.target.priority.value;
             const dueDate = event.target.dueDate.value;
-            const projectName = submitTodoForm.dataset.projectName; // used for editing within the project (this gets deleted)
+            // const projectName = submitTodoForm.dataset.projectName; // used for editing within the project (this gets deleted)
             const selectedProject = event.target.project.value; // taken from the form input.
-            // add completed here.
+            const originalProject = submitTodoForm.dataset.originalProject; // track for editing mode.
             
             if (submitTodoForm.dataset.editing === "true") {
                 // Edit mode: Update the existing todo
                 const todoTitle = submitTodoForm.dataset.todoTitle;
+
+                console.log("Editing todo:", todoTitle);
+                console.log("Original project:", originalProject, "New project:", selectedProject);
+
+
+                if (originalProject !== selectedProject) {
+                    const moveSuccess = AppController.moveTodoBetweenProjects(todoTitle, originalProject, selectedProject);
+                    if (moveSuccess) {
+                        console.log("Successfully moved todo to new project.");
+                    } else {
+                        console.error("Failed to move todo to new project.");
+                    }
+                }
     
-                const editSuccess = AppController.editTodoInProject(todoTitle, projectName, {
+                const editSuccess = AppController.editTodoInProject(todoTitle, selectedProject, {
                     title,
                     description,
                     priority,
@@ -49,8 +62,11 @@ function setupEventListeners() {
                 // Clear edit mode
                 delete submitTodoForm.dataset.editing;
                 delete submitTodoForm.dataset.todoTitle;
-                delete submitTodoForm.dataset.projectName;
-        
+                delete submitTodoForm.dataset.originalProject;
+
+                AppController.setDefaultProject(originalProject); // if we are editing, the default project doesn't change from view.
+                renderDefaultProject();
+
             } else {
                 // Create mode: Add a new todo
                 const newTodo = createTodo(title, description, priority, dueDate, false);

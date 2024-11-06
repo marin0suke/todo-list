@@ -187,7 +187,7 @@ function renderTodoForm() {
     selectProjectInput.name = "project";
     // selectProjectInput.placeholder = "Select Project";
     const projects = AppController.getAllProjects().filter(project => project.name !== "All Todos");
-    
+
     projects.forEach(project => {
         const option = document.createElement("option");
         option.value = project.name;
@@ -305,7 +305,7 @@ function openEditForm(todo, projectName) {
     // Set the form in edit mode
     todoForm.dataset.editing = "true";
     todoForm.dataset.todoTitle = todo.title;
-    todoForm.dataset.projectName = projectName;
+    todoForm.dataset.originalProject = projectName; // Set original project name here
 }
 
 export { renderProjects, renderTodoForm, toggleForm, renderProjectForm, renderDefaultProject, openEditForm } ;
