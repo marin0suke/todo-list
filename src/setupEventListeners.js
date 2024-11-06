@@ -1,6 +1,6 @@
 
 // add event listeners here. start by adding add project button and add todo button.
-import AppController from "./appController";
+import AppController from "./AppController";
 import { renderProjects, renderTodoForm, toggleForm, renderProjectForm} from "./domRenderer";
 import createTodo from "./createTodo";
 import createProject from "./createProject";

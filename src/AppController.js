@@ -1,5 +1,6 @@
 
 import createProject from "./createProject";
+import { renderDefaultProject } from "./domRenderer";
 import { moveTodosBetweenProjects } from "./projectUtils";
 
 const AppController = (() => {
@@ -25,6 +26,10 @@ const AppController = (() => {
             };
         }
     };
+
+    function getDefaultProjectName() {
+        return defaultProject;
+    }
     
 
     function moveTodoUtility(todoTitle, sourceProjectName, targetProjectName) { // necessary to have this here since we are searching within projects array for the source and target.
@@ -55,7 +60,8 @@ const AppController = (() => {
         addTodoToProject,
         moveTodoUtility,
         getProjectTodos,
-        getAllProjects
+        getAllProjects,
+        getDefaultProjectName
     };
 
 })();

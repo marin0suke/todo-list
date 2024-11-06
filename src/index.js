@@ -1,9 +1,9 @@
 import createTodo from "./createTodo.js";
 import createProject from "./createProject.js";
 import { moveTodosBetweenProjects } from "./projectUtils.js";
-import AppController from "./appController.js";
+import AppController from "./AppController.js";
 import "./styles.css";
-import { renderProjects } from "./domRenderer.js";
+import { renderDefaultProject, renderProjects } from "./domRenderer.js";
 import { setupEventListeners } from "./setupEventListeners.js";
 
 function initializeApp() { // some dummy content, renders initial page.
@@ -17,6 +17,7 @@ function initializeApp() { // some dummy content, renders initial page.
     AppController.addTodoToProject(buyHardDrive, "Chores");
 
     renderProjects(AppController.getAllProjects());
+    // render default container here.
 }
 
 window.onload = () => { // conditionally runs block on whether window is loaded - event listeners don't run until elements are on the page. (avoid timing conflicts).
