@@ -157,7 +157,7 @@ function renderTodoForm() {
 
     const submitButton = document.createElement("button");
     submitButton.type = "submit";
-    submitButton.textContent = "Add Todo";
+    submitButton.textContent = "Confirm";
     todoForm.appendChild(submitButton);
 
     const escNote = document.createElement("p");
