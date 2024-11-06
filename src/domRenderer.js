@@ -93,8 +93,8 @@ function renderDefaultProject() {
         deleteButton.style.fontSize = "10px";
         deleteButton.classList.add("delete-button");
         deleteButton.addEventListener("click", () => {
-            project.removeTodo(todo.title);
-            renderProjects(projects);
+            defaultProject.removeTodo(todo.title);
+            renderDefaultProject();
         })
         itemContainer.appendChild(deleteButton);
 
