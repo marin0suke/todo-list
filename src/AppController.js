@@ -30,8 +30,7 @@ const AppController = (() => {
     function setDefaultProject(projectName) {
         const project = projects.find(p => p.name === projectName);
         if (project) {
-            defaultProject = project; //
-            // renderDefaultProject();
+            defaultProject = project; 
             return true; // successfully changed.
         } else {
             return false; // project not found.

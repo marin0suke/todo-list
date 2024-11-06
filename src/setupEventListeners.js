@@ -59,7 +59,7 @@ function setupEventListeners() {
     
             toggleForm(".todo-form-container", false); // hides form
             event.target.reset();
-            renderDefaultProject();
+            renderDefaultProject(); // shows added todo in default container straight away.
         });
 
         const createProjectButton = document.querySelector(".create-project");
@@ -91,16 +91,19 @@ function setupProjectSelection() {
     const projectElements = document.querySelectorAll(".project"); // Assuming .project is the class for each project
 
     projectElements.forEach(projectElement => {
-        projectElement.addEventListener("click", () => {
-            const projectName = projectElement.querySelector("h5").textContent; // Assuming <h2> holds the project name
-
-            if (AppController.setDefaultProject(projectName)) {
-                renderDefaultProject(); // Re-render todos in default container
-            } else {
-                console.error(`Project "${projectName}" not found`);
-            }
-        });
+        projectElement.removeEventListener("click", handleProjectClick); // removes existing so no double ups.
+        projectElement.addEventListener("click", handleProjectClick);
     });
+}
+
+function handleProjectClick(event) {
+    const projectName = event.currentTarget.querySelector("h5").textContent;
+
+    if (AppController.setDefaultProject(projectName)) {
+        renderDefaultProject(); // Re-render todos in default container
+    } else {
+        console.error(`Project "${projectName}" not found`);
+    }
 }
 
 export { setupEventListeners, setupProjectSelection };
