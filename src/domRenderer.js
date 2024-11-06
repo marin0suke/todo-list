@@ -103,7 +103,7 @@ function renderDefaultProject() {
         editButton.style.fontSize = "10px";
         editButton.classList.add("edit-button");
         editButton.addEventListener("click", () => {
-            //   
+            openEditForm(todo, defaultProject.name);
         });
         itemContainer.appendChild(editButton);
 
@@ -233,4 +233,23 @@ function renderProjectForm() {
     return formContainer;
 }
 
-export { renderProjects, renderTodoForm, toggleForm, renderProjectForm, renderDefaultProject} ;
+function openEditForm(todo, projectName) {
+    const formContainer = document.querySelector(".todo-form-container");
+    const todoForm = document.querySelector(".todo-form");
+
+    // Show the form
+    formContainer.style.display = "block";
+
+    // Populate the form with the todo's current details
+    todoForm.title.value = todo.title;
+    todoForm.description.value = todo.description;
+    todoForm.priority.value = todo.priority;
+    todoForm.dueDate.value = todo.dueDate;
+
+    // Set the form in edit mode
+    todoForm.dataset.editing = "true";
+    todoForm.dataset.todoTitle = todo.title;
+    todoForm.dataset.projectName = projectName;
+}
+
+export { renderProjects, renderTodoForm, toggleForm, renderProjectForm, renderDefaultProject, openEditForm } ;

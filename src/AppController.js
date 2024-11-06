@@ -39,11 +39,47 @@ const AppController = (() => {
     function getDefaultProject() {
         return defaultProject;
     }
+
+    function editTodoInProject(todoTitle, projectName, updatedFields) {
+        if (!projects || !projects.length) {
+            console.error("Projects array is undefined or empty");
+            return false;
+        }
+    
+        const project = projects.find(p => p.name === projectName);
+        if (!project) {
+            console.error(`Project with name "${projectName}" not found.`);
+            return false;
+        }
+    
+        // Check if the todos array exists on the project
+        if (!project.todos || !Array.isArray(project.todos)) {
+            console.error(`The "todos" array is missing or not initialized in project "${projectName}".`);
+            return false;
+        }
+    
+        const todo = project.todos.find(todo => todo.title === todoTitle);
+        if (!todo) {
+            console.error(`Todo with title "${todoTitle}" not found in project "${projectName}".`);
+            return false;
+        }
+    
+        // Update the todo with the new values
+        todo.editTodo(
+            updatedFields.title,
+            updatedFields.description,
+            updatedFields.priority,
+            updatedFields.dueDate
+        );
+        console.log("Todo successfully edited:", todo);
+        return true; // Edit successful
+    }
+    
     
 
     function moveTodoUtility(todoTitle, sourceProjectName, targetProjectName) { // necessary to have this here since we are searching within projects array for the source and target.
-        const sourceProject = project.find(p => p.name === sourceProjectName);
-        const targetProject = project.find(p => p.name === targetProjectName);
+        const sourceProject = projects.find(p => p.name === sourceProjectName);
+        const targetProject = projects.find(p => p.name === targetProjectName);
 
         if (sourceProject && targetProject) {
             moveTodosBetweenProjects(todoTitle, sourceProject, targetProject);
@@ -71,7 +107,8 @@ const AppController = (() => {
         getProjectTodos,
         getAllProjects,
         getDefaultProject,
-        setDefaultProject
+        setDefaultProject,
+        editTodoInProject
     };
 
 })();

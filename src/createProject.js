@@ -4,6 +4,7 @@ function createProject(name) {
 
     return { // return obj.
         name,
+        todos,
         addTodo(todo) { // method.
             todos.push(todo);
         },

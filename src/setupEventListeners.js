@@ -25,12 +25,37 @@ function setupEventListeners() {
             const description = event.target.description.value;
             const priority = event.target.priority.value;
             const dueDate = event.target.dueDate.value;
+            const projectName = submitTodoForm.dataset.projectName;
             // add completed here.
             
-            const newTodo = createTodo(title, description, priority, dueDate, false);
+            if (submitTodoForm.dataset.editing === "true") {
+                // Edit mode: Update the existing todo
+                const todoTitle = submitTodoForm.dataset.todoTitle;
+    
+                const editSuccess = AppController.editTodoInProject(todoTitle, projectName, {
+                    title,
+                    description,
+                    priority,
+                    dueDate,
+                });
+                
+                if (editSuccess) {
+                    renderDefaultProject(); // Re-render the updated project after editing
+                } else {
+                    console.error("Failed to edit the todo.");
+                }
 
-            const defaultProject = AppController.getDefaultProject(); // create default var for this block.
-            defaultProject.addTodo(newTodo); // 
+                // Clear edit mode
+                delete submitTodoForm.dataset.editing;
+                delete submitTodoForm.dataset.todoTitle;
+                delete submitTodoForm.dataset.projectName;
+        
+            } else {
+                // Create mode: Add a new todo
+                const newTodo = createTodo(title, description, priority, dueDate, false);
+                const defaultProject = AppController.getDefaultProject();
+                defaultProject.addTodo(newTodo);
+            }
     
             toggleForm(".todo-form-container", false); // hides form
             event.target.reset();
