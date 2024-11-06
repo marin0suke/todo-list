@@ -43,19 +43,20 @@ body {
 }
 
 .default-container {
-    background-color: #fecdd3;
+    background-color: #fda4af;
     padding: 20px;
+    color: white;
     border-radius: 10px;
     display: flex; /*temp to check how cards are looking*/
     flex-direction: column;
     gap: 10px;
     padding: 20px;
-    background-color: #ffe6e6; /* Light pink background */
     border-radius: 25px; /* Rounded corners for a cushion-like effect */
     box-shadow: 
         0px 0px 15px 8px rgba(0, 0, 0, 0.15), /* Evenly spread shadow for front lighting */
         inset 0px 0px 8px rgba(255, 255, 255, 0.9); /* Inner highlight for puffy look */
     transition: box-shadow 0.3s ease; /* Smooth transition for interactions */
+    flex: 1;
 }
 
 .search {
@@ -140,7 +141,16 @@ body {
 .project {
     background-color: #fda4af;
     padding: 20px;
-    border-radius: 10px;
+    color: white;
+    border-radius: 15px;
+    display: flex; /*temp to check how cards are looking*/
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    box-shadow: 
+        0px 0px 15px 8px rgba(0, 0, 0, 0.05), /* Evenly spread shadow for front lighting */
+        inset 0px 0px 8px rgba(255, 255, 255, 0.9); /* Inner highlight for puffy look */
+    transition: box-shadow 0.3s ease; /* Smooth transition for interactions */
 }
 
 .project h2 {

@@ -9,100 +9,11 @@ function renderProjects(projects) {
         const projectDiv = document.createElement("div");
         projectDiv.classList.add("project");
 
-        const projectTitle = document.createElement("h2");
+        const projectTitle = document.createElement("h5");
         projectTitle.textContent = project.name; // Set the title as plain text
         projectTitle.style.marginBottom = "20px";
         projectDiv.appendChild(projectTitle);
 
-        // const todoList = document.createElement("ul"); // create empty list to put todos.
-        // todoList.classList.add("todo-list");
-
-        // let todos = project.getTodos(); // get todos.
-
-        // todos = todos.sort((a, b) => a.completed - b.completed); // sorts in array. completed at bottom. 
-
-        // todos.forEach(todo => { // everything created here will be attached to each todo item.
-        //     const todoItem = document.createElement("li");
-        //     todoItem.classList.add("todo-item");
-
-        //     const itemContainer = document.createElement("div");
-        //     itemContainer.classList.add("list-item-container");
-
-        //     const checkbox = document.createElement("input");
-        //     checkbox.type = "checkbox";
-        //     checkbox.checked = todo.completed;
-        //     checkbox.classList.add("completed-checkbox");
-        //     itemContainer.appendChild(checkbox);
-
-        //     checkbox.addEventListener("change", () => {
-        //         todo.completed = checkbox.checked; // Update todo completion status
-        //         renderProjects(projects); // Re-render projects to update order and style
-        //     });
-
-        //     const textContentContainer = document.createElement("div");
-        //     textContentContainer.classList.add("text-content");
-
-        //     const itemTitle = document.createElement("span");
-        //     itemTitle.textContent = todo.title;
-        //     itemTitle.classList.add("item-title");
-        //     textContentContainer.appendChild(itemTitle);
-
-        //     const itemDescription = document.createElement("span");
-        //     itemDescription.textContent = todo.description;
-        //     itemDescription.style.fontStyle = "italic";
-        //     itemDescription.classList.add("item-description");
-        //     textContentContainer.appendChild(itemDescription);
-
-        //     itemContainer.appendChild(textContentContainer);
-
-        //     // Create date span
-        //     const dateSpan = document.createElement("span");
-        //     dateSpan.classList.add("todo-date");
-        //     dateSpan.textContent = `Due: ${todo.dueDate}`;
-        //     itemContainer.appendChild(dateSpan);
-
-        //     // Create priority dot
-        //     const priorityDot = document.createElement("span");
-        //     priorityDot.classList.add("priority-dot");
-        //     if (todo.priority === "High") {
-        //         priorityDot.classList.add("high-priority");
-        //     } else if (todo.priority === "Medium") {
-        //         priorityDot.classList.add("medium-priority");
-        //     } else {
-        //         priorityDot.classList.add("low-priority");
-        //     }
-        //     itemContainer.appendChild(priorityDot);
-
-        //     const deleteButton = document.createElement("button");
-        //     deleteButton.innerHTML = `Del`;
-        //     deleteButton.style.fontSize = "10px";
-        //     deleteButton.classList.add("delete-button");
-        //     deleteButton.addEventListener("click", () => {
-        //         project.removeTodo(todo.title);
-        //         renderProjects(projects);
-        //     })
-        //     itemContainer.appendChild(deleteButton);
-
-        //     const editButton = document.createElement("button");
-        //     editButton.textContent = "Edit";
-        //     editButton.style.fontSize = "10px";
-        //     editButton.classList.add("edit-button");
-        //     editButton.addEventListener("click", () => {
-        //         //   
-        //     });
-        //     itemContainer.appendChild(editButton);
-
-        //     todoItem.appendChild(itemContainer);
-
-        //     if (todo.completed) {
-        //         todoItem.classList.add("completed-todo");
-        //     }
-
-        //     todoList.appendChild(todoItem);
-
-        // });
-
-        // projectDiv.appendChild(todoList);
         container.appendChild(projectDiv); // inside forEach loop so each project is attached.
     })
 }
@@ -113,6 +24,10 @@ function renderDefaultProject() {
 
     const defaultProject = AppController.getDefaultProject();
     let todos = defaultProject.getTodos();
+
+    const defaultTitle = document.createElement("h2");
+    defaultTitle.textContent = defaultProject.name;
+    container.appendChild(defaultTitle);
 
     const todoList = document.createElement("ul"); // create empty list to put todos.
     todoList.classList.add("todo-list");

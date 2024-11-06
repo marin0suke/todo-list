@@ -17,7 +17,7 @@ function initializeApp() { // some dummy content, renders initial page.
     AppController.addTodoToProject(buyHardDrive, "Chores");
 
     renderProjects(AppController.getAllProjects());
-    renderDefaultProject(AppController.getDefaultProject());
+    renderDefaultProject();
 }
 
 window.onload = () => { // conditionally runs block on whether window is loaded - event listeners don't run until elements are on the page. (avoid timing conflicts).
