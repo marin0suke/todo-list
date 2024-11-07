@@ -20,7 +20,43 @@ function renderProjects(projects) {
     })
 
     setupProjectSelection(); // reapplies event listeners after rendering projects.
+
+    // updateProjectDropdown(projects);
 }
+
+// function updateProjectDropdown(projects, defaultProject) {
+//     const selectProjectInput = document.querySelector("select[name='project']");
+//     if (!selectProjectInput) return; // If the dropdown doesn't exist, exit early
+
+//     // Clear existing options
+//     selectProjectInput.innerHTML = "";
+
+//     // Add the placeholder option
+//     const placeholderOption = document.createElement("option");
+//     placeholderOption.value = "";
+//     placeholderOption.textContent = "Select a project";
+//     placeholderOption.disabled = true;
+//     placeholderOption.selected = true;
+//     selectProjectInput.appendChild(placeholderOption);
+
+//     const filteredProjects = projects.filter(project => project.name !== "All Todos");
+    
+//     // Sort so that defaultProject appears at the top
+//     filteredProjects.sort((a, b) => (a.name === defaultProject ? -1 : 1));
+
+//     // Populate dropdown with the current list of projects
+//     projects.forEach(project => {
+//         const option = document.createElement("option");
+//         option.value = project.name;
+//         option.textContent = project.name;
+
+//         if (project.name === defaultProject) {
+//             option.selected = true;
+//         }
+
+//         selectProjectInput.appendChild(option);
+//     });
+// }
 
 function renderDefaultProject() {
     const container = document.querySelector(".default-container");
@@ -431,6 +467,12 @@ function renderFilteredTodos(todos, query) {
     container.appendChild(todoList);
 }
 
+function handleNewProjectCreation(name) {
+    AppController.addProject(name); // Add the new project and set it as default
+    renderProjects(AppController.getAllProjects()); // Re-render the project list
+    renderDefaultProject(); // Display the new default project in the main view
+}
+
 
 export {
     renderProjects, 
@@ -439,5 +481,6 @@ export {
     renderProjectForm, 
     renderDefaultProject, 
     openEditForm,
-    renderFilteredTodos
+    renderFilteredTodos,
+    handleNewProjectCreation
 };

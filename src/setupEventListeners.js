@@ -1,7 +1,7 @@
 
 // add event listeners here. start by adding add project button and add todo button.
 import AppController from "./AppController";
-import { renderProjects, renderTodoForm, toggleForm, renderProjectForm, renderDefaultProject, renderFilteredTodos } from "./domRenderer";
+import { renderProjects, renderTodoForm, toggleForm, renderProjectForm, renderDefaultProject, renderFilteredTodos, handleNewProjectCreation} from "./domRenderer";
 import createTodo from "./createTodo";
 
 function setupEventListeners() {
@@ -92,7 +92,7 @@ function setupEventListeners() {
         const name = event.target.projectTitle.value;
 
         if (name) {
-            AppController.addProject(name);
+            handleNewProjectCreation(name); // Call the function to add and display the new project
 
             toggleForm(".project-form-container", false);
             event.target.reset();

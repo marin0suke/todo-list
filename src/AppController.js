@@ -2,11 +2,13 @@
 import createProject from "./createProject";
 import createTodo from "./createTodo";
 
+
 const AppController = (() => {
     let projects = [];
 
     let defaultProject = createProject("All Todos"); 
     projects.push(defaultProject);
+
 
     function saveDataToLocalStorage() {
         const projectsData = projects.map(project => ({
@@ -45,9 +47,11 @@ const AppController = (() => {
     function addProject(name) {
         const project = createProject(name);
         projects.push(project);
+        setDefaultProject(name);
         saveDataToLocalStorage(); // **Modified: Save on add**
         return project;
     };
+    
 
     function addTodoToProject(todo, projectName) {
         const project = projects.find(p => p.name === projectName);
@@ -214,8 +218,7 @@ const AppController = (() => {
         deleteProject,
         handleSearch,
         deleteTodo,
-        getProjectNameForTodo
-    };
+        getProjectNameForTodo    };
 
 })();
 
