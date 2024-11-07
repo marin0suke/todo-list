@@ -122,6 +122,12 @@ function setupSearch() {
             renderFilteredTodos(filteredTodos, query);
         }
     });
+
+    const clearSearch = document.querySelector(".clear-search");
+    clearSearch.addEventListener("click", () => {
+        searchInput.value = ""; // Clear the search input field
+        renderDefaultProject(); // Show the default project view
+    });
 }
 
 function setupProjectSelection() {
