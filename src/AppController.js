@@ -1,15 +1,51 @@
 
 import createProject from "./createProject";
+import createTodo from "./createTodo";
 
 const AppController = (() => {
-    const projects = [];
+    let projects = [];
 
     let defaultProject = createProject("All Todos"); 
     projects.push(defaultProject);
 
+    function saveDataToLocalStorage() {
+        const projectsData = projects.map(project => ({
+            name: project.name,
+            todos: project.getTodos().map(todo => ({
+                title: todo.title,
+                description: todo.description,
+                priority: todo.priority,
+                dueDate: todo.dueDate,
+                completed: todo.completed,
+            }))
+        }));
+        localStorage.setItem('projects', JSON.stringify(projectsData));
+    }
+
+    function loadDataFromLocalStorage() {
+        const storedProjects = JSON.parse(localStorage.getItem('projects'));
+        if (storedProjects) {
+            projects = storedProjects.map(projectData => {
+                const project = createProject(projectData.name);
+                projectData.todos.forEach(todoData => {
+                    const todo = createTodo(
+                        todoData.title,
+                        todoData.description,
+                        todoData.priority,
+                        todoData.dueDate,
+                        todoData.completed
+                    );
+                    project.addTodo(todo);
+                });
+                return project;
+            });
+        }
+    }
+
     function addProject(name) {
         const project = createProject(name);
         projects.push(project);
+        saveDataToLocalStorage(); // **Modified: Save on add**
         return project;
     };
 
@@ -17,6 +53,7 @@ const AppController = (() => {
         const project = projects.find(p => p.name === projectName);
         if (project) {
             project.addTodo(todo); // uses addTodo inside createProject to push todo to targeted project.
+            saveDataToLocalStorage(); // **Modified: Save on add**
         } else {
             return {
                 success: false,
@@ -70,7 +107,8 @@ const AppController = (() => {
             updatedFields.priority,
             updatedFields.dueDate
         );
-        console.log("Todo successfully edited:", todo);
+
+        saveDataToLocalStorage(); // **Modified: Save on add**
         return true; // Edit successful
     }
     
@@ -85,6 +123,7 @@ const AppController = (() => {
             if (todoIndex !== -1) {
                 const [todo] = sourceProject.todos.splice(todoIndex, 1); // Remove the todo
                 targetProject.addTodo(todo); // Add the todo to the target project
+                saveDataToLocalStorage(); // **Modified: Save on add**
                 return true;
             }
         } else {
@@ -124,6 +163,7 @@ const AppController = (() => {
             if (defaultProject === deletedProject) {
                 setDefaultProject("All Todos");
             }
+            saveDataToLocalStorage(); // **Modified: Save on add**
             return true;
         } else {
             console.error(`Project "${projectName}" not found.`);
@@ -144,6 +184,7 @@ const AppController = (() => {
             if (project.hasTodo(todoTitle)) { // Check if the project has the todo
                 const removedTodo = project.removeTodo(todoTitle);
                 if (removedTodo) {
+                    saveDataToLocalStorage(); // **Modified: Save on add**
                     console.log(`Todo "${todoTitle}" removed from project "${project.name}".`);
                     return true; // Stop after finding and deleting the todo
                 }
@@ -158,6 +199,7 @@ const AppController = (() => {
         return project ? project.name : null;
     }
     
+    loadDataFromLocalStorage();
 
     return {
         addProject,

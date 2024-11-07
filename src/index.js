@@ -5,15 +5,7 @@ import { renderDefaultProject, renderProjects } from "./domRenderer.js";
 import { setupEventListeners, setupProjectSelection, setupSearch} from "./setupEventListeners.js";
 
 function initializeApp() { // some dummy content, renders initial page.
-    AppController.addProject("Chores");
-    AppController.addProject("Uni");
-
-    const cleanToilet = createTodo("Clean the toilet", "Deep clean the bathroom", "High", "2024-11-15", false);
-    const buyHardDrive = createTodo("Buy hard drive", "Purchase a 1TB SSD", "Medium", "2024-11-20", false);
-
-    AppController.addTodoToProject(cleanToilet, "Chores");
-    AppController.addTodoToProject(buyHardDrive, "Chores");
-
+    
     renderProjects(AppController.getAllProjects());
     setupProjectSelection();
     setupSearch();
