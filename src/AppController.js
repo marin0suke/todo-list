@@ -1,7 +1,5 @@
 
 import createProject from "./createProject";
-import { renderDefaultProject } from "./domRenderer";
-import { moveTodosBetweenProjects } from "./projectUtils";
 
 const AppController = (() => {
     const projects = [];
@@ -132,6 +130,14 @@ const AppController = (() => {
             return false;
         }
     }
+
+    function handleSearch(query) {
+        const normalizedQuery = query.toLowerCase().trim();
+        const todos = getAllTodos();
+        return todos.filter(todo => 
+            todo.title.toLowerCase().includes(normalizedQuery)
+        );
+    }
     
 
     return {
@@ -144,7 +150,8 @@ const AppController = (() => {
         setDefaultProject,
         editTodoInProject,
         getAllTodos,
-        deleteProject
+        deleteProject,
+        handleSearch
     };
 
 })();

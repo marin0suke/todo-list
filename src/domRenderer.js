@@ -340,4 +340,55 @@ function openEditForm(todo, projectName) {
     todoForm.dataset.originalProject = projectName; // Set original project name here
 }
 
-export { renderProjects, renderTodoForm, toggleForm, renderProjectForm, renderDefaultProject, openEditForm } ;
+
+
+function renderFilteredTodos(todos, query) {
+    const container = document.querySelector(".default-container");
+    container.innerHTML = ""; // Clear current contents
+
+    const todoList = document.createElement("ul");
+    todoList.classList.add("todo-list");
+
+    todos.forEach(todo => {
+        const todoItem = document.createElement("li");
+        todoItem.classList.add("todo-item");
+
+        const itemContainer = document.createElement("div");
+        itemContainer.classList.add("list-item-container");
+
+        const itemTitle = document.createElement("span");
+        itemTitle.classList.add("item-title");
+
+        const title = todo.title;
+        const lowerCaseTitle = title.toLowerCase();
+        const lowerCaseQuery = query.toLowerCase();
+
+        const startIndex = lowerCaseTitle.indexOf(lowerCaseQuery);
+        if (startIndex !== -1) {
+            const beforeMatch = title.slice(0, startIndex);
+            const matchText = title.slice(startIndex, startIndex + query.length);
+            const afterMatch = title.slice(startIndex + query.length);
+
+            itemTitle.innerHTML = `${beforeMatch}<span class="highlight">${matchText}</span>${afterMatch}`;
+        } else {
+            itemTitle.textContent = title; // Fallback in case of no match (shouldn't happen here)
+        }
+
+        itemContainer.appendChild(itemTitle);
+        todoItem.appendChild(itemContainer);
+        todoList.appendChild(todoItem);
+    });
+
+    container.appendChild(todoList);
+}
+
+
+export {
+    renderProjects, 
+    renderTodoForm, 
+    toggleForm, 
+    renderProjectForm, 
+    renderDefaultProject, 
+    openEditForm,
+    renderFilteredTodos
+};

@@ -302,3 +302,9 @@ body {
     font-size: 8px;
     color: white;
 }
+
+.highlight {
+    background-color: yellow; /* or your choice of highlight color */
+    font-weight: bold;
+}
+

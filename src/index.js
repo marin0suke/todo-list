@@ -1,9 +1,8 @@
 import createTodo from "./createTodo.js";
-import createProject from "./createProject.js";
 import AppController from "./AppController.js";
 import "./styles.css";
 import { renderDefaultProject, renderProjects } from "./domRenderer.js";
-import { setupEventListeners, setupProjectSelection} from "./setupEventListeners.js";
+import { setupEventListeners, setupProjectSelection, setupSearch} from "./setupEventListeners.js";
 
 function initializeApp() { // some dummy content, renders initial page.
     AppController.addProject("Chores");
@@ -17,6 +16,7 @@ function initializeApp() { // some dummy content, renders initial page.
 
     renderProjects(AppController.getAllProjects());
     setupProjectSelection();
+    setupSearch();
     renderDefaultProject();
 }
 
