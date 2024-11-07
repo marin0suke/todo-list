@@ -346,6 +346,10 @@ function renderFilteredTodos(todos, query) {
     const container = document.querySelector(".default-container");
     container.innerHTML = ""; // Clear current contents
 
+    const title = document.createElement("h2");
+    title.textContent = "Search results:";
+    container.appendChild(title);
+
     const todoList = document.createElement("ul");
     todoList.classList.add("todo-list");
 
