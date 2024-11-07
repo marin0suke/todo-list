@@ -1,5 +1,6 @@
 import AppController from "./AppController";
 import { setupProjectSelection } from "./setupEventListeners";
+import createProject from "./createProject";
 
 function renderProjects(projects) {
     const container = document.querySelector(".projects-container");
@@ -356,6 +357,7 @@ function renderFilteredTodos(todos, query) {
         const itemContainer = document.createElement("div");
         itemContainer.classList.add("list-item-container");
 
+        // Highlight the query within the title
         const itemTitle = document.createElement("span");
         itemTitle.classList.add("item-title");
 
@@ -368,16 +370,54 @@ function renderFilteredTodos(todos, query) {
             const beforeMatch = title.slice(0, startIndex);
             const matchText = title.slice(startIndex, startIndex + query.length);
             const afterMatch = title.slice(startIndex + query.length);
-
             itemTitle.innerHTML = `${beforeMatch}<span class="highlight">${matchText}</span>${afterMatch}`;
         } else {
-            itemTitle.textContent = title; // Fallback in case of no match (shouldn't happen here)
+            itemTitle.textContent = title;
         }
 
-        itemContainer.appendChild(itemTitle);
+        itemContainer.appendChild(itemTitle);    
+
+        // Add due date
+        const dueDateSpan = document.createElement("span");
+        dueDateSpan.classList.add("todo-date");
+        dueDateSpan.textContent = `Due: ${todo.dueDate}`;
+        itemContainer.appendChild(dueDateSpan);
+
+        // Add priority indicator
+        const priorityDot = document.createElement("span");
+        priorityDot.classList.add("priority-dot");
+        if (todo.priority === "High") {
+            priorityDot.classList.add("high-priority");
+        } else if (todo.priority === "Medium") {
+            priorityDot.classList.add("medium-priority");
+        } else {
+            priorityDot.classList.add("low-priority");
+        }
+        itemContainer.appendChild(priorityDot);
+
+        // Add delete button with functionality
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("delete-button");
+        deleteButton.addEventListener("click", () => {
+            AppController.deleteTodo(todo.title);
+            renderFilteredTodos(todos.filter(t => t.title !== todo.title), query); // Refresh filtered list without deleted todo
+        });
+        itemContainer.appendChild(deleteButton);
+
+        // Add edit button with functionality
+        const editButton = document.createElement("button");
+        editButton.textContent = "Edit";
+        editButton.classList.add("edit-button");
+        editButton.addEventListener("click", () => {
+            openEditForm(todo, todo.projectName); // Adjust as needed to pass the project name
+        });
+        itemContainer.appendChild(editButton);
+
         todoItem.appendChild(itemContainer);
         todoList.appendChild(todoItem);
     });
+
 
     container.appendChild(todoList);
 }

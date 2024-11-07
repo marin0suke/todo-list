@@ -138,6 +138,20 @@ const AppController = (() => {
             todo.title.toLowerCase().includes(normalizedQuery)
         );
     }
+
+    function deleteTodo(todoTitle) {
+        for (const project of projects) {
+            if (project.hasTodo(todoTitle)) { // Check if the project has the todo
+                const removedTodo = project.removeTodo(todoTitle);
+                if (removedTodo) {
+                    console.log(`Todo "${todoTitle}" removed from project "${project.name}".`);
+                    return true; // Stop after finding and deleting the todo
+                }
+            }
+        }
+        console.error(`Todo "${todoTitle}" not found in any project.`);
+        return false; // Todo not found in any project
+    }
     
 
     return {
@@ -151,7 +165,8 @@ const AppController = (() => {
         editTodoInProject,
         getAllTodos,
         deleteProject,
-        handleSearch
+        handleSearch,
+        deleteTodo
     };
 
 })();
