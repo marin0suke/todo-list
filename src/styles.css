@@ -308,3 +308,7 @@ body {
     font-weight: bold;
 }
 
+.empty-message {
+    text-align: center;
+    font-size: 14px;
+}

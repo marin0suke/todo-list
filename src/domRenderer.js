@@ -58,9 +58,13 @@ function renderDefaultProject() {
 
     let todos = isAllTodos ? AppController.getAllTodos() : defaultProject.getTodos(); // conditionally grab todos depending on whether All or another project.
 
-    todos = todos.sort((a, b) => a.completed - b.completed); // sorts in array. completed at bottom. 
-
-    todos.forEach(todo => { // everything created here will be attached to each todo item.
+    if (todos.length === 0 && isAllTodos) {
+        const emptyMessage = document.createElement("p");
+        emptyMessage.textContent = "Get started by creating a project!";
+        emptyMessage.classList.add("empty-message");
+        container.appendChild(emptyMessage);
+    } else { 
+        todos.sort((a, b) => a.completed - b.completed).forEach(todo => { // everything created here will be attached to each todo item.
         const todoItem = document.createElement("li");
         todoItem.classList.add("todo-item");
 
@@ -157,7 +161,8 @@ function renderDefaultProject() {
 
         todoList.appendChild(todoItem);
 
-    });
+        });
+    }
 
     container.appendChild(todoList);
 
