@@ -298,7 +298,6 @@ function renderProjectForm() {
 }
 
 function openEditForm(todo, projectName) {
-    const formContainer = document.querySelector(".todo-form-container");
     const todoForm = document.querySelector(".todo-form");
 
     // Show the form
@@ -410,7 +409,8 @@ function renderFilteredTodos(todos, query) {
         editButton.textContent = "Edit";
         editButton.classList.add("edit-button");
         editButton.addEventListener("click", () => {
-            openEditForm(todo, todo.projectName); // Adjust as needed to pass the project name
+            const projectName = AppController.getProjectNameForTodo(todo.title); // Get project name for the todo
+            openEditForm(todo, projectName); // Adjust as needed to pass the project name
         });
         itemContainer.appendChild(editButton);
 

@@ -152,6 +152,11 @@ const AppController = (() => {
         console.error(`Todo "${todoTitle}" not found in any project.`);
         return false; // Todo not found in any project
     }
+
+    function getProjectNameForTodo(todoTitle) {
+        const project = projects.find(p => p.hasTodo(todoTitle));
+        return project ? project.name : null;
+    }
     
 
     return {
@@ -166,7 +171,8 @@ const AppController = (() => {
         getAllTodos,
         deleteProject,
         handleSearch,
-        deleteTodo
+        deleteTodo,
+        getProjectNameForTodo
     };
 
 })();
