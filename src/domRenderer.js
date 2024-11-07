@@ -21,42 +21,7 @@ function renderProjects(projects) {
 
     setupProjectSelection(); // reapplies event listeners after rendering projects.
 
-    // updateProjectDropdown(projects);
 }
-
-// function updateProjectDropdown(projects, defaultProject) {
-//     const selectProjectInput = document.querySelector("select[name='project']");
-//     if (!selectProjectInput) return; // If the dropdown doesn't exist, exit early
-
-//     // Clear existing options
-//     selectProjectInput.innerHTML = "";
-
-//     // Add the placeholder option
-//     const placeholderOption = document.createElement("option");
-//     placeholderOption.value = "";
-//     placeholderOption.textContent = "Select a project";
-//     placeholderOption.disabled = true;
-//     placeholderOption.selected = true;
-//     selectProjectInput.appendChild(placeholderOption);
-
-//     const filteredProjects = projects.filter(project => project.name !== "All Todos");
-    
-//     // Sort so that defaultProject appears at the top
-//     filteredProjects.sort((a, b) => (a.name === defaultProject ? -1 : 1));
-
-//     // Populate dropdown with the current list of projects
-//     projects.forEach(project => {
-//         const option = document.createElement("option");
-//         option.value = project.name;
-//         option.textContent = project.name;
-
-//         if (project.name === defaultProject) {
-//             option.selected = true;
-//         }
-
-//         selectProjectInput.appendChild(option);
-//     });
-// }
 
 function renderDefaultProject() {
     const container = document.querySelector(".default-container");
@@ -206,6 +171,11 @@ function renderDefaultProject() {
 }
 
 function renderTodoForm() {
+    const existingForm = document.querySelector(".todo-form-container");
+    if (existingForm) {
+        existingForm.remove();
+    }
+
     const formContainer = document.createElement("div");
     formContainer.classList.add("todo-form-container");
     formContainer.style.display = "none"; // initially hidden.
@@ -237,11 +207,17 @@ function renderTodoForm() {
     placeholderOption.selected = true;
     selectProjectInput.appendChild(placeholderOption);
 
+    const defaultProject = AppController.getDefaultProject();
     const projects = AppController.getAllProjects().filter(project => project.name !== "All Todos");
+
     projects.forEach(project => {
         const option = document.createElement("option");
         option.value = project.name;
         option.textContent = project.name;
+        if (project.name === defaultProject.name) {
+            option.selected = true; // Automatically select the default project
+            placeholderOption.selected = false; // Remove placeholder as selected
+        }
         selectProjectInput.appendChild(option);
     });
     todoForm.appendChild(selectProjectInput);
@@ -276,6 +252,8 @@ function renderTodoForm() {
 
     formContainer.appendChild(todoForm); 
     document.body.appendChild(formContainer); // attach to the document body so it actually shows up.
+
+    titleInput.focus();
 
     return formContainer;
 }
@@ -471,6 +449,7 @@ function handleNewProjectCreation(name) {
     AppController.addProject(name); // Add the new project and set it as default
     renderProjects(AppController.getAllProjects()); // Re-render the project list
     renderDefaultProject(); // Display the new default project in the main view
+    renderTodoForm();
 }
 
 

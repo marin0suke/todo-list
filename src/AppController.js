@@ -218,7 +218,8 @@ const AppController = (() => {
         deleteProject,
         handleSearch,
         deleteTodo,
-        getProjectNameForTodo    };
+        getProjectNameForTodo
+    };
 
 })();
 
