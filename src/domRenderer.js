@@ -175,6 +175,7 @@ function renderTodoForm() {
     titleInput.type = "text";
     titleInput.name = "title"; // check how this changes from id - which is better, use both?
     titleInput.placeholder = "What would you like to do?";
+    titleInput.required = true;
     todoForm.appendChild(titleInput);
 
     const descriptionInput = document.createElement("input");
@@ -185,9 +186,16 @@ function renderTodoForm() {
 
     const selectProjectInput = document.createElement("select");
     selectProjectInput.name = "project";
-    // selectProjectInput.placeholder = "Select Project";
-    const projects = AppController.getAllProjects().filter(project => project.name !== "All Todos");
+    selectProjectInput.required = true;
 
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = "Select a project";
+    placeholderOption.disabled = true;
+    placeholderOption.selected = true;
+    selectProjectInput.appendChild(placeholderOption);
+
+    const projects = AppController.getAllProjects().filter(project => project.name !== "All Todos");
     projects.forEach(project => {
         const option = document.createElement("option");
         option.value = project.name;
@@ -235,17 +243,16 @@ function toggleForm(selector, visible) {
         form.style.display = "none"; // hide all forms. 
     });
 
-    if (visible) {
-        const formContainer = document.querySelector(selector);
-        if (formContainer) { // if formContainer exists (standard check).
-            formContainer.style.display = "block"; // make visible.
-            document.addEventListener("keydown", handleEscKey); // Add ESC key listener
-        } else {
-            formContainer.style.display = "none";
-            document.removeEventListener("keydown", handleEscKey); // Remove listener when closed
-        }
+    const formContainer = document.querySelector(selector);
+
+    if (visible && formContainer) {
+        formContainer.style.display = "block";
+        document.addEventListener("keydown", handleEscKey);
     } else {
-        console.error(`Element with selector "${selector}" not found.`);
+        document.removeEventListener("keydown", handleEscKey);
+        if (!formContainer) {
+            console.error(`Element with selector "${selector}" not found.`);
+        }
     }
 }
 
@@ -294,13 +301,38 @@ function openEditForm(todo, projectName) {
     const todoForm = document.querySelector(".todo-form");
 
     // Show the form
-    formContainer.style.display = "block";
+    toggleForm(".todo-form-container", true);
 
     // Populate the form with the todo's current details
     todoForm.title.value = todo.title;
     todoForm.description.value = todo.description;
     todoForm.priority.value = todo.priority;
     todoForm.dueDate.value = todo.dueDate;
+
+    // Populate the project dropdown and preselect the current project
+    const projectSelector = todoForm.querySelector("select[name='project']");
+    projectSelector.innerHTML = ""; // Clear existing options
+
+    const placeholderOption = document.createElement("option");
+    placeholderOption.value = "";
+    placeholderOption.textContent = "Select a project";
+    placeholderOption.disabled = true;
+    projectSelector.appendChild(placeholderOption);
+
+    // Get all projects except "All Todos" and populate the dropdown
+    const projects = AppController.getAllProjects().filter(proj => proj.name !== "All Todos");
+    projects.forEach(project => {
+        const option = document.createElement("option");
+        option.value = project.name;
+        option.textContent = project.name;
+
+        // Set the option as selected if it matches the todo's current project
+        if (project.name === projectName) {
+            option.selected = true;
+        }
+
+        projectSelector.appendChild(option);
+    });
 
     // Set the form in edit mode
     todoForm.dataset.editing = "true";

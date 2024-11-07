@@ -123,20 +123,48 @@ body {
 
 .todo-form-container, 
 .project-form-container
-{ /*hidden form triggered by add todo*/
+{   
     display: flex;
     align-items: center; /* Center items vertically */
     justify-content: space-between; /* Space out elements horizontally */
     background-color: #fb7185; /* Light background color */
-    padding: 20px;
+    padding: 30px;
     border-radius: 35px; /* Rounded corners for a cushion-like effect */
     box-shadow: 
         0px 0px 15px 8px rgba(0, 0, 0, 0.15), /* Evenly spread shadow for front lighting */
         inset 0px 0px 8px rgba(255, 255, 255, 0.9); /* Inner highlight for puffy look */
     transition: box-shadow 0.3s ease; /* Smooth transition for interactions */
     position: absolute;
- 
+}
 
+.todo-form, .project-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between elements */
+    width: 100%;
+}
+
+.todo-form input, .project-form input,
+.todo-form select, .project-form select,
+.todo-form button, .project-form button {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+}
+
+.todo-form button, .project-form button {
+    background-color: #5a9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Placeholder text color */
+.todo-form select option:first-child,
+.project-form select option:first-child {
+    color: gray;
 }
 
 .project {
